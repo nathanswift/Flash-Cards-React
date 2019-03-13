@@ -1,7 +1,6 @@
 import React from 'react'
 import { Header, Icon, Button, Container, Card } from 'semantic-ui-react'
 import Fcards from './Fcards'
-import Fcard from './Fcard'
 
 class App extends React.Component {
   state = {
@@ -13,6 +12,19 @@ class App extends React.Component {
   ]}
   
   getId = () => Math.floor((1 + Math.random()) * 10000)
+
+  addCard = (flashData) => {
+    let fcard = { id: this.getId(), ...flashData }
+    this.setState({ flashcards: [...this.state.flashcards, fcard] })
+  }
+
+  removeCard = (id) => {
+    const flashcards = this.state.flashcards.filter( fcard => {
+      if (fcard.id !== id)
+        return fcard
+    })
+    this.setState({ flashcards })
+  }
   
   render() {
     return (
@@ -21,12 +33,18 @@ class App extends React.Component {
           <Icon name='users' circular />
           <Header.Content>FLASH</Header.Content>
         </Header>
-        <Button inverted secondary/>
+        <br/><br/>
+        <Button inverted secondary
+          onClick={this.addCard}
+        > 
+        Add a New Flashcard </Button>
+        <br/><br/>
         <Card.Group itemsPerRow={4}>
         { this.state.flashcards.map(fcard => {
         return (
           <Fcards 
           fcard={fcard}
+          removeCard={this.removeCard}
           />
           )
         })}
