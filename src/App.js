@@ -7,10 +7,10 @@ import LLogo from './flashlamp4.png'
 class App extends React.Component {
   state = {
     flashcards: [
-    { id: 1, question: `How much weight can a leopard carry up a tree`, answer: `twice it's bodyweight`},
+    { id: 1, question: `How much weight can a leopard carry up a tree?`, answer: `Twice it's bodyweight!`},
     { id: 2, question: `How far is Jupiter from the sun?`, answer: `483.8 million mi`},
     { id: 3, question: `What year was JavaScript Created?`, answer: `1995`},
-    { id: 4, question: `How much wood could a woodchuck chuck if a woodchuck could chuck wood`, answer: `Lots of wood could a woodchuck chuck if a woodchuck could chuck wood`}
+    { id: 4, question: `How much wood could a woodchuck chuck if a woodchuck could chuck wood?`, answer: `Lots of wood could a woodchuck chuck if a woodchuck could chuck wood!`}
   ]}
   
   getId = () => Math.floor((1 + Math.random()) * 10000)
@@ -76,7 +76,7 @@ class App extends React.Component {
               onClick={this.toggleForm}
               > 
             Add a New Flashcard </Button>
-            { this.state.showForm ? <Cform addCard={this.addCard} /> : null}
+            { this.state.showForm ? <Cform key={this.state.id} addCard={this.addCard} /> : null}
         </Container>
       </div>
     )
