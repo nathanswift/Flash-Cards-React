@@ -83,6 +83,10 @@ class Fcards extends React.Component {
             padding: '10px'
         }
 
+        let editStyles = {
+            padding: '35px'
+        }
+
         return(
         <Card style={cardStyle}>
             <div style={viewStyle}> 
@@ -98,7 +102,7 @@ class Fcards extends React.Component {
             <Button.Group style={btnGroupStyle}>
                 <Button color="red" onClick={() => {this.props.removeCard(this.props.fcard.id)}}>Delete</Button>
                 <Button.Or />
-                <Button color="blue" onClick={() => {this.editCard(this.props.fcard.id)}}>Edit</Button>
+                <Button color="blue" onClick={() => {this.editCard(this.props.fcard)}}>Edit</Button>
             </Button.Group>
             <Button 
                 style={btnStyle}
@@ -110,7 +114,7 @@ class Fcards extends React.Component {
             />
             </div>
             <div style={editStyle}>
-            <Form>
+            <Form style={editStyles}>
             <Icon name='question circle'/>New Question
             <Input 
                 onKeyDown={this.handleEditing}

@@ -15,12 +15,12 @@ class Cform extends React.Component {
     }
 
     render() {
+
         return (
-            <Form onSubmit={this.handleSubmit}>
+            <Form centered aligned onSubmit={this.handleSubmit}>
             <Form.Group widths="equal">
                 <Form.Input
                     fluid
-                    label="Question"
                     placeholder="Question"
                     name="question"
                     debugger
@@ -29,7 +29,6 @@ class Cform extends React.Component {
                 />
                 <Form.Input
                     fluid
-                    label="Answer"
                     placeholder="Answer"
                     name="answer"
                     value={this.props.answer}
