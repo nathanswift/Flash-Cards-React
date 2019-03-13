@@ -1,6 +1,7 @@
 import React from 'react'
-import { Header, Icon, Button, Container, Card } from 'semantic-ui-react'
+import { Header, Icon, Button, Container, Card, Input } from 'semantic-ui-react'
 import Fcards from './Fcards'
+import Cform from './Form'
 
 class App extends React.Component {
   state = {
@@ -25,6 +26,10 @@ class App extends React.Component {
     })
     this.setState({ flashcards })
   }
+
+  toggleForm = () => this.setState({ showForm: !this.state.showForm })
+
+  toggleQ = () => this.setState({ showA: !this.props.showA })
   
   render() {
     return (
@@ -35,9 +40,10 @@ class App extends React.Component {
         </Header>
         <br/><br/>
         <Button inverted secondary
-          onClick={this.addCard}
-        > 
+          onClick={this.toggleForm}
+          > 
         Add a New Flashcard </Button>
+        { this.state.showForm ? <Cform addCard={this.addCard} /> : null}
         <br/><br/>
         <Card.Group itemsPerRow={4}>
         { this.state.flashcards.map(fcard => {
@@ -45,6 +51,7 @@ class App extends React.Component {
           <Fcards 
           fcard={fcard}
           removeCard={this.removeCard}
+          editCard={this.editCard}
           />
           )
         })}
