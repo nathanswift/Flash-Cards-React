@@ -1,11 +1,13 @@
 import React from 'react'
 import { Button, Image, Card, Icon, Form, Input} from 'semantic-ui-react'
+import QAimage from './QA.png'
 
 
 class Fcards extends React.Component {
     state = {
         editing: false,
-        showA: false
+        showA: false,
+        count: 0
     }
 
     toggleQ = () => this.setState({ showA: !this.state.showA })
@@ -36,6 +38,11 @@ class Fcards extends React.Component {
         console.log('changing them diapers')
         
     }
+
+    countLikes = (e) => {
+        let _count = (this.state.count + 1)
+        this.setState({ count: _count})
+    }
     
     
     render() {
@@ -49,24 +56,58 @@ class Fcards extends React.Component {
             editStyle.display = 'none'
         }
 
+        let cardStyle = {
+            color: 'white',
+            backgroundColor: '#232a35'
+        }
+
+        let btnStyle = {
+            display: 'flex',
+            alignItems: 'flex-bottom',
+            width: '100%'
+        }
+
+        let cardBodyStyle = {
+            width: '100%',
+            margin: 'auto',
+            height: '75px'
+        }
+
+        let btnGroupStyle = {
+            width: '100%',
+            padding: '10px'
+        }
+
+        let headerStyle = {
+            fontSize: '2em',
+            padding: '10px'
+        }
+
         return(
-        <Card>
+        <Card style={cardStyle}>
             <div style={viewStyle}> 
-            <Image src='https://banner2.kisspng.com/20180706/tp/kisspng-question-mark-computer-icons-check-mark-question-png-5b3fe4188f5878.9335032515309138165872.jpg' />
+            <Image src={QAimage} />
             <Card.Content>
-                <Card.Header> {this.state.showA ? `Answer` : `Question`} </Card.Header> 
+                <Card.Header style={headerStyle}> {this.state.showA ? `Answer` : `Question`} </Card.Header> 
             </Card.Content>
-            <Card.Description>
+            <Card.Description style={cardBodyStyle}>
                {this.state.showA ? this.state.changedAnswer : this.state.changedQuestion}
             </Card.Description>
+            <Button style={btnGroupStyle} color='orange' onClick={() => this.toggleQ()}> {this.state.showA ? `Get Question` : `Get Answer`} </Button>  
             <br/>
-            <Button onClick={() => this.toggleQ()}> {this.state.showA ? `Get Question` : `Get Answer`} </Button>
-            <Card.Content extra>
-                <Icon name='heart'/>
-                Like everytime you get it right!
-            </Card.Content>    
-            <Button color="red" onClick={() => {this.props.removeCard(this.props.fcard.id)}}>Delete</Button>
-            <Button color="blue" onClick={() => {this.editCard(this.props.fcard.value)}}>Edit</Button>
+            <Button.Group style={btnGroupStyle}>
+                <Button color="red" onClick={() => {this.props.removeCard(this.props.fcard.id)}}>Delete</Button>
+                <Button.Or />
+                <Button color="blue" onClick={() => {this.editCard(this.props.fcard.id)}}>Edit</Button>
+            </Button.Group>
+            <Button 
+                style={btnStyle}
+                color='green'
+                content='Like if you got the correct answer'
+                icon='heart'
+                label={{ basic: true, color: 'grey', pointing: 'left', content: this.state.count }}
+                onClick={() => this.countLikes(this.state.count)}
+            />
             </div>
             <div style={editStyle}>
             <Form>
