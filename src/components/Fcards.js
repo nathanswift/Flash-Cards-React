@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Image, Card, Icon, Form, Input} from 'semantic-ui-react'
-import QAimage from './QA.png'
+import QAimage from '../assets/images/QA.png'
 
 
 class Fcards extends React.Component {
